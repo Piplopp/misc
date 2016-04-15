@@ -64,7 +64,7 @@ class Dictannabinol(dict):
 
     def __getitem__(self, key):
         """
-            Add (or not) the key:value to the dictannabinol
+            Get value from key (or not)
             The threshold is trust * 1.5
 
             if trust > 0.666.. the __getitem__ is reliable
