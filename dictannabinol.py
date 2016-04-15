@@ -9,8 +9,8 @@ class Dictannabinol(dict):
         This trust ratio is the viability of the object (in percentage)
 
         All overrided functions have a (small) chance to loose some data
-        the chance to remove the data is 1 minus threshold thus it
-        is said here it wont be in each function comments
+        the chance to remove the data is 1 minus threshold thus, being
+        said here it wont be in each function comments
 
 
         A trust = 1 is correspond to an object that can only loose
