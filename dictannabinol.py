@@ -13,7 +13,7 @@ class Dictannabinol(dict):
         said here it wont be in each function comments
 
 
-        A trust = 1 is correspond to an object that can only loose
+        A trust = 1 correspond to an object that can only loose
     """
 
 
