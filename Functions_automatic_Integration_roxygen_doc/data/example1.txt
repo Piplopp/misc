@@ -1,0 +1,27 @@
+For this example the "good" comment_symbol should be #'
+
+#' @title A TITLE
+#' @name A NAME
+#' @thing
+#' @export
+
+#' @title ANOTHER TITLE
+#' @name ANOTHER NAME
+#' @export
+some
+    indented
+        and awesome code
+
+# @title A THIRD TITLE THAT SHOULD NOT BE TAKEN BECAUSE WRONG COMMENT_SYMBOL
+# @name A THIRD NAME THAT SHOULD NOT BE TAKEN BECAUSE WRONG COMMENT_SYMBOL
+# @export
+
+#' @title SHOULD NOT BE INCLUDED BECAUSE NO export TAG
+#' @name SHOULD NOT BE INCLUDED BECAUSE NO export TAG
+some other code
+    that is as wonderfull{
+        as a cat riding a unicorn
+    }
+
+#' @title SHOULD NOT BE INCLUDED BECAUSE NO export TAG
+#' @name SHOULD NOT BE INCLUDED BECAUSE NO export TAG
