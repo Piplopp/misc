@@ -4,6 +4,9 @@ For this example the "good" comment_symbol should be #'
 #' @name A NAME
 #' @thing
 #' <TAG2INCLUDE>
+#' \itemize{
+#'	\item FUNCTIO NAME: FUNCTION DESC
+#' }
 #' <TAG2INCLUDE>
 #' @export
 
