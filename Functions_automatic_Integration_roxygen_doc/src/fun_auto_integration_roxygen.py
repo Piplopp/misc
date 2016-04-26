@@ -19,6 +19,7 @@ import os
 import sys
 import re
 import glob # best. module. ever.
+import cli_parser
 
 ########
 # Misc #
@@ -31,7 +32,6 @@ class bcolors:
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
-
 
 
 #############
@@ -233,62 +233,103 @@ def update_file_list(file_content, tag_index, formated_informations):
     return file_content
 
 
-def run_example():
+def run_example(test_folder):
     """
         Use the file data/example1.txt and print step by step the results
         Alternatively you can find the results of this function on the
         README
 
-        It creates a file example1_out.txt in the same directory and then delete it
+        It creates a file example1_out.txt in the same directory and delete
+        it at the end of the function
+
+        test_folder : path to the testing folder
     """
 
-
-if __name__ == "__main__":
-
-
-
-    if len(sys.argv) > 1:
-        for filename in glob.iglob(sys.argv[1]+'*'):
-            # parse file
-            print(bcolors.HEADER + "Updating doc for " + bcolors.ENDC + filename)
-            with open(filename, 'r') as INFILE:
-                file = INFILE.readlines()
-
-    filename = "data/example1_out.txt"
+    # Open test file
+    filename = test_folder + "example1.txt"
     print(bcolors.HEADER + "Updating doc for " + bcolors.ENDC + filename)
     with open(filename, 'r') as INFILE:
         file = INFILE.readlines()
 
     # Identify comment blocks
-    comment_blocks = get_comment_blocks(file, "#\'")
+    comment_blocks = get_comment_blocks(file, comment_symbol = "#\'")
+    print(bcolors.OKBLUE +  "comment_blocks = get_comment_blocks(file, comment_symbol = \"\#\'\")" + bcolors.ENDC)
     print(comment_blocks)
 
     # Filter all comment blocks
-    export_matching_blocks = select_comment_blocks(file, comment_blocks, "@export")
+    export_matching_blocks = select_comment_blocks(file, comment_blocks, condition = "@export")
+    print(bcolors.OKBLUE +  "select_comment_blocks(file, comment_blocks, condition = \"@export\")" + bcolors.ENDC)
     print(export_matching_blocks)
 
-    main_function = select_comment_blocks(file, comment_blocks, "<TAG2INCLUDE>")
+    main_function = select_comment_blocks(file, comment_blocks, condition = "<TAG2INCLUDE>")
+    print(bcolors.OKBLUE +  "select_comment_blocks(file, comment_blocks, condition = \"<TAG2INCLUDE>\")" + bcolors.ENDC)
     print(main_function)
 
     # Get informations about the functions defined by the filtered comment blocks
-    include_tag_index = get_line_index(file, main_function, "<TAG2INCLUDE>")
+    include_tag_index = get_line_index(file, main_function, condition = "<TAG2INCLUDE>")
+    print(bcolors.OKBLUE +  "get_line_index(file, main_function, condition = \"<TAG2INCLUDE>\")" + bcolors.ENDC)
     print(include_tag_index)
 
     func_to_get_infos = export_matching_blocks ^ main_function # symmetric difference
-    functions_informations = get_functions_informations(file, func_to_get_infos, "@name", "@title")
+    functions_informations = get_functions_informations(file, func_to_get_infos, tag_func_name = "@name", tag_func_desc = "@title")
+    print(bcolors.OKBLUE +  "get_functions_informations(file, func_to_get_infos, tag_func_name = \"@name\", tag_func_desc = \"@title\")" + bcolors.ENDC)
     print(functions_informations)
 
     # Assemble informations in an itemize
-    itemize = format_itemize(functions_informations, "#\'", "<TAG2INCLUDE>")
+    itemize = format_itemize(functions_informations, comment_symbol = "#\'", tag = "<TAG2INCLUDE>")
+    print(bcolors.OKBLUE +  "format_itemize(functions_informations, comment_symbol = \"\#\'\", tag = \"<TAG2INCLUDE>\")" + bcolors.ENDC)
     print(''.join(itemize))
 
     # Insert into file_content
     file = update_file_list(file, include_tag_index, itemize)
-    #print(''.join(file))
 
-    filename = "data/example1_out.txt"
+    # Updated file
+    filename = test_folder + "example1_out.txt"
     with open(filename, 'w') as OUTFILE:
         OUTFILE.write(''.join(file))
+    print(bcolors.WARNING + "File " + test_folder + "example1_out.txt created, please look at the result before continue" + bcolors.ENDC)
 
+    # Remove the created example file and end example
     input("End example (it will remove the created file)")
     os.system('rm ' + filename)
+
+
+def main(args):
+    """
+        Do the maths for all files in a directory
+    """
+    # Got all the files ! o/
+    for filename in glob.iglob(args["i"] + "*"):
+        print(bcolors.HEADER + "Updating doc for " + bcolors.ENDC + filename)
+        with open(filename, 'r') as INFILE:
+            file = INFILE.readlines()
+
+        # Identify comment blocks
+        comment_blocks = get_comment_blocks(file, args["comment"])
+        # Filter all comment blocks
+        export_matching_blocks = select_comment_blocks(file, comment_blocks, args["block"])
+        main_function = select_comment_blocks(file, comment_blocks, args["main"])
+        # Get informations about the functions defined by the filtered comment blocks
+        include_tag_index = get_line_index(file, main_function, args["main"])
+        func_to_get_infos = export_matching_blocks ^ main_function # symmetric difference
+        functions_informations = get_functions_informations(file, func_to_get_infos, args["tagname"], args["tagdesc"])
+        # Assemble informations in an itemize
+        itemize = format_itemize(functions_informations, args["comment"], args["main"])
+        # Insert into file_content
+        file = update_file_list(file, include_tag_index, itemize)
+        
+        # Updated file
+        with open(filename, 'w') as OUTFILE:
+            OUTFILE.write(''.join(file))
+
+
+if __name__ == "__main__":
+
+    args = cli_parser.read_args(sys.argv[1:])
+
+    if args["example"]:
+        run_example(args["i"])
+        sys.exit(0)
+    else:
+        main(args)
+

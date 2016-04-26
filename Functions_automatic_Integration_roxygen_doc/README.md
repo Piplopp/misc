@@ -3,39 +3,25 @@
 Look at the file located in data/example1.txt
 
 
----
-## Functions
-### get\_comment\_blocks(file\_content, comment\_symbol)
-This function aims to return a set of tuples containing the starting position of a comment block in the `file_content`.
-
-With _example1.txt_ and `comment_symbol = "#"` it should return (set not ordered, be carefull):
-
 ```python
-{(26, 2), (8, 3), (2, 5), (19, 2)}
+Updating doc for data/example1.txt
+comment_blocks = get_comment_blocks(file, comment_symbol = "\#'")
+{(20, 2), (27, 2), (2, 6), (9, 3)}
+select_comment_blocks(file, comment_blocks, condition = "@export")
+{(2, 6), (9, 3)}
+select_comment_blocks(file, comment_blocks, condition = "<TAG2INCLUDE>")
+{(2, 6)}
+get_line_index(file, main_function, condition = "<TAG2INCLUDE>")
+[5, 6]
+get_functions_informations(file, func_to_get_infos, tag_func_name = "@name", tag_func_desc = "@title")
+{('FUNCTIO NAME', 'FUNCTION DESC')}
+format_itemize(functions_informations, comment_symbol = "\#'", tag = "<TAG2INCLUDE>")
+#' <TAG2INCLUDE>
+#' \itemize{
+#'  \item FUNCTIO NAME: FUNCTION DESC
+#' }
+#' <TAG2INCLUDE>
 ```
 
-### select\_comment\_blocks(file\_content, comment\_blocks, condition)
-Return a set containing the tuples in `comment_blocks` for which their block is matching the `condition`
-
-With _example1.txt_ and `condition = "@export"` it should return:
 
 
-```python
-{(8, 3), (2, 5)}
-```
-
-With _example1.txt_ and `condition = "<TAG2INCLUDE>"` it should return:
-
-
-```python
-{(2, 5)}
-```
-
-### get\_functions\_informations(file\_content, comment\_block, tag\_func\_name, tag\_func\_desc)
-Return a set of tuples containing the name of the function and its description. The evaluated comment blocks are defined by comment_block
-
-With _example1.txt_, `tag_func_name = "@name"`, `tag_func_desc = "@title"` and considering the blocks without "<TAG2INCLUDE>" (aka set difference between the two results shown above) it should return:
-
-```python
-{("ANOTHER NAME", "ANOTHER TITLE")}
-```
