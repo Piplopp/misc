@@ -20,7 +20,23 @@ import sys
 import re
 import glob # best. module. ever.
 
+########
+# Misc #
+########
+#@resume: class for colors (ASCII code) used for coloring terminal output such as print
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
 
+
+
+#############
+# Main shit #
+#############
 def get_comment_blocks(file_content, comment_symbol):
     """
         This function return a set of tuples containing the starting position
@@ -216,16 +232,27 @@ def update_file_list(file_content, tag_index, formated_informations):
     file_content[tag_index[0]: tag_index[1]+1] = formated_informations
     return file_content
 
-if __name__ == "__main__":
-    #@resume: class for colors (ASCII code) used for coloring terminal output such as print
-    class bcolors:
-        HEADER = '\033[95m'
-        OKBLUE = '\033[94m'
-        OKGREEN = '\033[92m'
-        WARNING = '\033[93m'
-        FAIL = '\033[91m'
-        ENDC = '\033[0m'
 
+def run_example():
+    """
+        Use the file data/example1.txt and print step by step the results
+        Alternatively you can find the results of this function on the
+        README
+
+        It creates a file example1_out.txt in the same directory and then delete it
+    """
+
+
+if __name__ == "__main__":
+
+
+
+    if len(sys.argv) > 1:
+        for filename in glob.iglob(sys.argv[1]+'*'):
+            # parse file
+            print(bcolors.HEADER + "Updating doc for " + bcolors.ENDC + filename)
+            with open(filename, 'r') as INFILE:
+                file = INFILE.readlines()
 
     filename = "data/example1_out.txt"
     print(bcolors.HEADER + "Updating doc for " + bcolors.ENDC + filename)
@@ -262,3 +289,6 @@ if __name__ == "__main__":
     filename = "data/example1_out.txt"
     with open(filename, 'w') as OUTFILE:
         OUTFILE.write(''.join(file))
+
+    input("End example (it will remove the created file)")
+    os.system('rm ' + filename)
