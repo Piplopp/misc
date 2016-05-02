@@ -6,17 +6,17 @@ This README also contain several oneliners used time to time
 - [Functions\_automatic\_Integration\_roxygen\_doc](#roxygen)
 - [Oneliners](#oneliners)
 
-#### Scripts
-###### Dictannabinol.py<a name="dictannabinol"></a>
+### Scripts
+##### Dictannabinol.py<a name="dictannabinol"></a>
 Python object reminder, long time no object in python
 Python dict-like class that forgets things. I need to rename this...
 This script is based on [https://github.com/gitpan/Tie-Hash-Cannabinol](https://github.com/gitpan/Tie-Hash-Cannabinol)
 
-###### Functions\_automatic\_Integration\_roxygen\_doc<a name="roxygen"></a>
+##### Functions\_automatic\_Integration\_roxygen\_doc<a name="roxygen"></a>
 Python3; automatic generation for some part of roxygen documentation
 See inside for more details
 
-#### Oneliners <a name="oneliners"></a>
+### Oneliners <a name="oneliners"></a>
 ===
 **Concat files without their 1st line**
 ```bash
