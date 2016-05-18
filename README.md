@@ -27,5 +27,5 @@ find . -name "*.txt" | xargs -n 1 tail -n +2 > outfile
 
 **Extract all columns but the one matching regex**
 ```awk
-awk 'NR==1{for(i=1;i<=NF;i++)if($i~/_[kv][0-9]+$/){a[i]=1;m=i}}{for(i=1;i<=NF;i++){if(!a[i]){printf "%s%s",$i,(i>m?RS:FS)}}printf "\n"}' FILE.tsv
+awk 'NR==1{for(i=1;i<=NF;i++)if(!($i~/_[kv][0-9]+$/)){a[i]=1;m=i}}{for(i=1;i<=NF;i++)if(a[i])printf "%s%s",$i,(i==m?RS:FS)}' FILE.tsv |column -t
 ```
