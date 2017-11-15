@@ -57,9 +57,9 @@ if __name__ == "__main__":
     INFILE = args.input
     OUTFILE = os.path.splitext(INFILE)[0] + '.script'
     while True:
-        move = str(input("Quel type de mouvement (movep, movel, movea) ?: ").strip().lower())
-        if move not in ['movep', 'movel', 'movea']:
-            print(C_FAIL + "Mouvement " + C_ENDC + move + C_FAIL + " non reconnu, veuillez choisir parmis: movep, movel, movea" + C_ENDC)
+        move = str(input("Quel type de mouvement (movep, movel, movej) ?: ").strip().lower())
+        if move not in ['movep', 'movel', 'movej']:
+            print(C_FAIL + "Mouvement " + C_ENDC + move + C_FAIL + " non reconnu, veuillez choisir parmis: movep, movel, movej" + C_ENDC)
         else:
             break
     a = float(input("Entrez la valeur a= ").strip())
