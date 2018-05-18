@@ -5,6 +5,7 @@ This README also contain several oneliners used time to time
 - [Dictannabinol.py](#dictannabinol)
 - [Functions\_automatic\_Integration\_roxygen\_doc](#roxygen)
 - [robotguide2urscript](#robotguide2urscript)
+- [DMS2DD](#dms2dd)
 - [Oneliners](#oneliners)
 
 
@@ -23,6 +24,11 @@ See inside for more details
 #### robotguide2urscript<a name="robotguide2urscript"></a>
 Python3; convert robotguide waypoints files to URscript
 Quickly done
+
+
+---
+#### DMS2DD<a name="dms2dd"></a>
+Python3; transform GPS Degrees Minutes Seconds locations into Decimal Degrees
 
 ---
 
