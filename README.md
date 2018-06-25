@@ -42,3 +42,10 @@ find . -name "*.txt" | xargs -n 1 tail -n +2 > outfile
 ```awk
 awk 'NR==1{for(i=1;i<=NF;i++)if(!($i~/REGEX_HERE:_[kv][0-9]+$/)){a[i]=1;m=i}}{for(i=1;i<=NF;i++)if(a[i])printf "%s%s",$i,(i==m?RS:FS)}' FILE.tsv |column -t
 ```
+
+**Create N files of size S**
+```bash
+# Create 20 000 files of size = 1MB; change bs to change size
+for i in $(seq 1 20000); do touch $i; dd if=/dev/urandom of=$i bs=1024 count=1024 >/dev/null 2>&1; done
+```
+
