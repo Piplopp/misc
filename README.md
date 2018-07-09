@@ -49,3 +49,8 @@ awk 'NR==1{for(i=1;i<=NF;i++)if(!($i~/REGEX_HERE:_[kv][0-9]+$/)){a[i]=1;m=i}}{fo
 for i in $(seq 1 20000); do touch $i; dd if=/dev/urandom of=$i bs=1024 count=1024 >/dev/null 2>&1; done
 ```
 
+**Python, create a test email server that prints mail in terminal instead of sending them**
+```bash
+# Mail is sent to localhost on port 8025 in this example
+python -m smtpd -n -c DebuggingServer localhost:8025
+```
