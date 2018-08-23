@@ -54,3 +54,11 @@ for i in $(seq 1 20000); do touch $i; dd if=/dev/urandom of=$i bs=1024 count=102
 # Mail is sent to localhost on port 8025 in this example
 python -m smtpd -n -c DebuggingServer localhost:8025
 ```
+
+**Extract only even/odd lines from a file**
+```bash
+# even
+sed -n '0~2p' file.csv > output.csv
+# odd
+sed -n '1~2p' file.csv > output.csv
+```
