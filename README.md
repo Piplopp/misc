@@ -62,3 +62,10 @@ sed -n '0~2p' file.csv > output.csv
 # odd
 sed -n '1~2p' file.csv > output.csv
 ```
+
+**Count number of reads in fasta/fastq files**
+```
+# Fasta
+grep '>' file.fasta | wc -l
+# Fastq
+awk '{lines++}END{print lines/4}' file.fastq
