@@ -72,7 +72,7 @@ awk '{lines++}END{print lines/4}' file.fastq
 ```
 
 **Extract sequences from a fasta based on a list of IDs**
-̀```bash
-cut -c 1- FILE_IDs.TXT | xargs -n 1 samtools faidx FILE.FASTA
+```bash
 # Change the value in 'cut' to strip unneccessary characters before your id
+cut -c 1- FILE_IDs.TXT | xargs -n 1 samtools faidx FILE.FASTA
 ```
