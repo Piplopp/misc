@@ -69,3 +69,9 @@ sed -n '1~2p' file.csv > output.csv
 grep '>' file.fasta | wc -l
 # Fastq
 awk '{lines++}END{print lines/4}' file.fastq
+
+** Extract sequences from a fasta based on a list of IDs **
+̀```
+cut -c 1- FILE_IDs.TXT | xargs -n 1 samtools faidx FILE.FASTA
+# Change the value in 'cut' to strip unneccessary characters before your id
+```
