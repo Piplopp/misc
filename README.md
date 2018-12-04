@@ -69,6 +69,7 @@ sed -n '1~2p' file.csv > output.csv
 grep '>' file.fasta | wc -l
 # Fastq
 awk '{lines++}END{print lines/4}' file.fastq
+```
 
 ** Extract sequences from a fasta based on a list of IDs **
 ̀```
