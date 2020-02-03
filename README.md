@@ -76,3 +76,10 @@ awk '{lines++}END{print lines/4}' file.fastq
 # Change the value in 'cut' to strip unneccessary characters before your id
 cut -c 1- FILE_IDs.TXT | xargs -n 1 samtools faidx FILE.FASTA
 ```
+
+**Extract specific regions from a fasta file (using bedtools)**
+```bash
+bedtools getfasta -fi file.fasta -bed file.bed -fo output.fasta -name
+
+# See the bed file format here: https://felixfan.github.io/bedtools/
+```
