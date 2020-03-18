@@ -83,3 +83,9 @@ bedtools getfasta -fi file.fasta -bed file.bed -fo output.fasta -name
 
 # See the bed file format here: https://felixfan.github.io/bedtools/
 ```
+
+**Rename a tilda (or xterm compatible terminal programs) tab**
+```bash
+NAME="tab name here"
+echo -e  "\e]2;$NAME\a  tab --> [$NAME]"
+```
