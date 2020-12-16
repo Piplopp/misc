@@ -106,8 +106,8 @@ focus
 screen -t "YOUR TITLE 2" bash -c "<your bash command>; sh"
 split -v
 focus
-screen -t "Yarn Start MyNadis Doctor" bash -c "<your bash command>; sh"
+screen -t "YOUR TITLE 3" bash -c "<your bash command>; sh"
 split -v
 focus
-screen -t "Yarn Run MyNadis Patient" bash -c "<your bash command>; sh"
+screen -t "YOUR TITLE 4" bash -c "<your bash command>; sh"
 ```
