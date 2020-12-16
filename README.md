@@ -89,3 +89,25 @@ bedtools getfasta -fi file.fasta -bed file.bed -fo output.fasta -name
 NAME="tab name here"
 echo -e  "\e]2;$NAME\a  tab --> [$NAME]"
 ```
+
+**Create multiple screens to run several commands in it**
+```bash
+#!/bin/bash
+# Run this script with this command: screen -c "./start-mynadis-apps.sh" && pkill screen
+# && pkill screen will just kill all the existing screens once you detach; on macos use pkill SCREEN instead
+
+# split is going to split your window; the -v option is for vertical splitting and only available for screen > 4.01.0
+# focus gonna change the focus to the newly created window
+# using ;sh as the final bash command will allow you to keep the screen running. Otherwise it will terminate itself once the command is done running
+
+screen -t "YOUR TITLE 1" bash -c "<your bash command>; sh"
+split -v
+focus
+screen -t "YOUR TITLE 2" bash -c "<your bash command>; sh"
+split -v
+focus
+screen -t "Yarn Start MyNadis Doctor" bash -c "<your bash command>; sh"
+split -v
+focus
+screen -t "Yarn Run MyNadis Patient" bash -c "<your bash command>; sh"
+```
